@@ -1,0 +1,2 @@
+build/machines/cortex-m/armv6m/stm32g0b1/tpl_trace.c.o: \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/tpl_trace.c

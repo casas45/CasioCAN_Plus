@@ -1,0 +1,17 @@
+build/machines/cortex-m/tpl_sc_handler.S.o: \
+ ../../../../../../machines/cortex-m/tpl_sc_handler.S \
+ ../../../../../../machines/cortex-m/tpl_assembler.h \
+ ../../../../../../machines/cortex-m/tpl_asm_definitions.h \
+ ../../../../../../machines/cortex-m/tpl_os_kernel_stack.h \
+ readbutton_isr/tpl_service_ids.h ../../../../../../os/tpl_config_def.h \
+ ../../../../../../os/tpl_as_memmap.h readbutton_isr/tpl_app_define.h \
+ ../../../../../../os/tpl_config_check.h readbutton_isr/AsMemMap.h
+../../../../../../machines/cortex-m/tpl_assembler.h:
+../../../../../../machines/cortex-m/tpl_asm_definitions.h:
+../../../../../../machines/cortex-m/tpl_os_kernel_stack.h:
+readbutton_isr/tpl_service_ids.h:
+../../../../../../os/tpl_config_def.h:
+../../../../../../os/tpl_as_memmap.h:
+readbutton_isr/tpl_app_define.h:
+../../../../../../os/tpl_config_check.h:
+readbutton_isr/AsMemMap.h:

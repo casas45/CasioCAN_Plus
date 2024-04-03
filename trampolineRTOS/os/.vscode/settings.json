@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "tpl_machine_interface.h": "c",
+        "tpl_os_hooks.h": "c"
+    }
+}

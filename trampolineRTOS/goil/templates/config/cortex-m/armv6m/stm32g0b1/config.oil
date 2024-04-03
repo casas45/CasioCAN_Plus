@@ -1,0 +1,121 @@
+IMPLEMENTATION stm32g0b1 {
+  DEVICE_KIND [] {
+    STRUCT {
+      UINT32 OFFSET;
+      ENUM [ BYTE, HALFWORD, WORD, DOUBLEWORD ] SIZE;
+      STRUCT {
+        UINT32 LOC;
+      } BIT [];
+      STRUCT {
+        UINT32 START;
+        UINT32 STOP;
+      } FIELD [];
+    } REGISTER [];
+    STRUCT {
+      IDENTIFIER ENABLE [];
+      BOOLEAN ACK = FALSE;
+    } EVENT [];
+  };
+  
+  DEVICE [] {
+    DEVICE_KIND_TYPE KIND;
+    UINT32 ADDRESS;
+    INTERRUPT_TYPE VECTOR;
+  };
+
+  OS {
+    BOOLEAN [
+      TRUE {
+        ENUM [
+          serial {
+            UINT32 RXBUFFER = 32;
+            UINT32 TXBUFFER = 16;
+          }
+        ] LIBRARY[];
+      },
+      FALSE
+    ] BUILD = FALSE;
+
+    /* trace */
+    BOOLEAN [
+      TRUE {
+        ENUM [
+          serial
+        ] FORMAT = serial;
+      },
+      FALSE
+    ] TRACE = FALSE;
+  };
+};
+
+CPU stm32g0b1 {
+  OS features {
+    ISR2_PRIORITY_MASKING = TRUE;
+  };
+
+  CORTEX stm32g0b1 {
+    PRIO_BITS = 2;    // used in tpl_cortex_definitions for NVIC config
+    CLOCK = 16000000; // init freq with no external oscillator...
+  };
+
+  BUILDOPTIONS buildOptions {
+     COMMONFLAGS = "-DSTM32G0B1xx"; //processor def
+  };
+
+  INTERRUPT_COUNT nb_it {
+    IT_TABLE_SIZE = 48; 
+  };
+  
+  #include "interruptDefs.oil"
+
+  /*************************************************************/
+
+  PLATFORM_FILES stm32g0b1 {
+    PATH = "cortex-m/armv6m/stm32g0b1";
+    CFILE = "startup_stm32g0b1.c";
+    CFILE = "system_stm32g0xx.c";
+    CFILE = "tpl_machine_stm32g0b1.c";
+  };
+
+  PLATFORM_FILES stm32g0b1_trace {
+    PATH = "cortex-m/armv6m/stm32g0b1";
+	  CFILE = "tpl_trace.c";
+  };
+
+  PLATFORM_FILES stm32g0b1_cmsis {
+    PATH = "cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include";
+  };
+
+  PLATFORM_FILES stm32g0b1IO {
+    PATH    = "cortex-m/armv6m/stm32g0b1/lib";
+    CFILE   = "pinAccess.c";
+  };
+
+  PLATFORM_FILES stm32g0b1_Hal {
+    PATH    = "cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc";
+  };
+
+  PLATFORM_FILES stm32g0b1_Hal_c {
+  PATH    = "cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Src";
+    CFILE   = "stm32g0xx_hal_gpio.c";
+  };
+
+  POSTBUILD all {
+    COMMAND buildbin {
+      TYPE = COPIER;
+      INPUT = TARGET;
+      OUTPUT = ".hex";
+      PREOPTION = "-Oihex";
+    };
+  };
+
+  POSTCOMMAND burn {
+    COMMAND flash {
+      MESSAGE = "Flashing";
+      COMMAND = "st-flash";
+      INPUT = TARGET { EXT = ".bin"; };
+      PREOPTION = "write";
+      POSTOPTION = "0x8000000";
+    };
+  };
+};

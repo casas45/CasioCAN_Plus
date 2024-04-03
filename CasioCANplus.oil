@@ -1,0 +1,95 @@
+OIL_VERSION = "2.5";
+
+IMPLEMENTATION trampoline {
+    /* This fix the default STACKSIZE of tasks */
+    TASK {
+        UINT32 STACKSIZE = 300 ;
+    } ;
+
+    /* This fix the default STACKSIZE of ISRs */
+    ISR {
+        UINT32 STACKSIZE = 200 ;
+    } ;
+};
+
+CPU casioCAN_plus {
+
+    OS config {
+        STATUS = STANDARD;
+
+        BUILD = FALSE;
+        SYSTEM_CALL = TRUE;
+
+        MEMMAP = TRUE {
+            COMPILER = gcc;
+            LINKER = gnu_ld { SCRIPT = "script.ld"; };
+            ASSEMBLER = gnu_as;
+            MEMORY_PROTECTION = FALSE;
+        };
+    };
+
+    APPMODE std {};
+
+    MESSAGE serialMsgSend {
+        MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
+            CDATATYPE = "APP_CanTypeDef";
+        };
+    };
+
+    MESSAGE serialMsgReceive {
+        MESSAGEPROPERTY = RECEIVE_QUEUED_INTERNAL {
+            SENDINGMESSAGE = serialMsgSend;
+            FILTER = ALWAYS;
+            QUEUESIZE = 20;
+        };
+    };
+
+    TASK Serial_PeriodicTask
+    {
+        PRIORITY = 10;
+        AUTOSTART = FALSE;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+
+        MESSAGE = serialMsgSend;
+        MESSAGE = serialMsgReceive;
+    };
+
+    ALARM SerialAlarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK { 
+            TASK = Serial_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            ALARMTIME = 10;
+            CYCLETIME = 10;
+            APPMODE = std;
+        };
+    };
+
+    ISR isr_CAN {
+        CATEGORY = 1;
+        PRIORITY = 25;
+        SOURCE = TIM16_FDCAN_IT0_IRQ;
+    };
+
+    TASK Hearbeat_PeriodicTask {
+        PRIORITY = 10;
+        AUTOSTART = FALSE;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+    };
+
+    ALARM HeatbeatAlarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK { 
+            TASK = Hearbeat_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            ALARMTIME = 300;
+            CYCLETIME = 300;
+            APPMODE = std;
+        };
+    };
+
+};

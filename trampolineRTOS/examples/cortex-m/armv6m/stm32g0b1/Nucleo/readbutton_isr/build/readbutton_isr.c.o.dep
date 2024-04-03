@@ -1,0 +1,133 @@
+build/readbutton_isr.c.o: readbutton_isr.c readbutton_isr/tpl_os.h \
+ ../../../../../../os/tpl_os_definitions.h \
+ ../../../../../../os/tpl_os_application_def.h \
+ readbutton_isr/tpl_app_define.h ../../../../../../os/tpl_config_def.h \
+ ../../../../../../os/tpl_config_check.h \
+ ../../../../../../os/tpl_os_application_def.h \
+ ../../../../../../os/tpl_os_error.h ../../../../../../os/tpl_os_types.h \
+ ../../../../../../os/tpl_os_internal_types.h \
+ ../../../../../../machines/cortex-m/tpl_os_std_types.h \
+ ../../../../../../os/tpl_os_custom_types.h \
+ readbutton_isr/tpl_app_custom_types.h \
+ ../../../../../../os/tpl_compiler.h readbutton_isr/Compiler.h \
+ readbutton_isr/Compiler_Cfg.h \
+ ../../../../../../machines/cortex-m/tpl_machine.h \
+ ../../../../../../machines/cortex-m/tpl_machine_cortex.h \
+ ../../../../../../machines/cortex-m/tpl_os_std_types.h \
+ ../../../../../../os/tpl_os_internal_types.h \
+ ../../../../../../os/tpl_os_custom_types.h \
+ ../../../../../../machines/cortex-m/tpl_machine.h \
+ ../../../../../../machines/cortex-m/tpl_os_kernel_stack.h \
+ readbutton_isr/cmsis_wrapper.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0b1xx.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cm0plus.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/_newlib_version.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cmInstr.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cmFunc.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h \
+ ../../../../../../os/tpl_compiler.h ../../../../../../os/tpl_memmap.h \
+ readbutton_isr/MemMap.h ../../../../../../os/tpl_os_os.h \
+ ../../../../../../os/tpl_os_interrupt.h \
+ ../../../../../../os/tpl_os_task.h \
+ ../../../../../../os/tpl_os_resource.h \
+ ../../../../../../os/tpl_os_alarm.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/lib/pinAccess.h \
+ stm32g0xx_hal_conf.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc_ex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_gpio.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_gpio_ex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_dma.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dmamux.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_dma_ex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_cortex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_exti.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash_ex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_fdcan.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
+ ../../../../../../os/tpl_memmap.h
+readbutton_isr/tpl_os.h:
+../../../../../../os/tpl_os_definitions.h:
+../../../../../../os/tpl_os_application_def.h:
+readbutton_isr/tpl_app_define.h:
+../../../../../../os/tpl_config_def.h:
+../../../../../../os/tpl_config_check.h:
+../../../../../../os/tpl_os_application_def.h:
+../../../../../../os/tpl_os_error.h:
+../../../../../../os/tpl_os_types.h:
+../../../../../../os/tpl_os_internal_types.h:
+../../../../../../machines/cortex-m/tpl_os_std_types.h:
+../../../../../../os/tpl_os_custom_types.h:
+readbutton_isr/tpl_app_custom_types.h:
+../../../../../../os/tpl_compiler.h:
+readbutton_isr/Compiler.h:
+readbutton_isr/Compiler_Cfg.h:
+../../../../../../machines/cortex-m/tpl_machine.h:
+../../../../../../machines/cortex-m/tpl_machine_cortex.h:
+../../../../../../machines/cortex-m/tpl_os_std_types.h:
+../../../../../../os/tpl_os_internal_types.h:
+../../../../../../os/tpl_os_custom_types.h:
+../../../../../../machines/cortex-m/tpl_machine.h:
+../../../../../../machines/cortex-m/tpl_os_kernel_stack.h:
+readbutton_isr/cmsis_wrapper.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0b1xx.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cm0plus.h:
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h:
+/usr/arm-none-eabi/include/stdint.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
+/usr/arm-none-eabi/include/sys/features.h:
+/usr/arm-none-eabi/include/_newlib_version.h:
+/usr/arm-none-eabi/include/sys/_intsup.h:
+/usr/arm-none-eabi/include/sys/_stdint.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cmInstr.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cmFunc.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h:
+../../../../../../os/tpl_compiler.h:
+../../../../../../os/tpl_memmap.h:
+readbutton_isr/MemMap.h:
+../../../../../../os/tpl_os_os.h:
+../../../../../../os/tpl_os_interrupt.h:
+../../../../../../os/tpl_os_task.h:
+../../../../../../os/tpl_os_resource.h:
+../../../../../../os/tpl_os_alarm.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/lib/pinAccess.h:
+stm32g0xx_hal_conf.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stddef.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc_ex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_gpio.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_gpio_ex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_dma.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dma.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_dmamux.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_dma_ex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_cortex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_exti.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash_ex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_fdcan.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
+../../../../../../os/tpl_memmap.h:

@@ -1,0 +1,10 @@
+CasioCANplus.oil: \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/config.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/kernel.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/api.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/api_ioc.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/cortex-m/config.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/cortex-m/armv6m/config.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/cortex-m/armv6m/buildOptions.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/cortex-m/armv6m/stm32g0b1/config.oil \
+ /home/ld_casas/Workspace/CasioCAN+/trampolineRTOS/goil/templates/config/config2.5.oil

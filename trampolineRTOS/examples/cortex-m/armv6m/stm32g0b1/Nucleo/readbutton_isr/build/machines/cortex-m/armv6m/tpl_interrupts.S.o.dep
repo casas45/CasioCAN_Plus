@@ -1,0 +1,16 @@
+build/machines/cortex-m/armv6m/tpl_interrupts.S.o: \
+ ../../../../../../machines/cortex-m/armv6m/tpl_interrupts.S \
+ ../../../../../../machines/cortex-m/tpl_assembler.h \
+ ../../../../../../machines/cortex-m/tpl_asm_definitions.h \
+ readbutton_isr/tpl_cortex_definitions.h \
+ ../../../../../../os/tpl_as_memmap.h readbutton_isr/tpl_app_define.h \
+ ../../../../../../os/tpl_config_def.h \
+ ../../../../../../os/tpl_config_check.h readbutton_isr/AsMemMap.h
+../../../../../../machines/cortex-m/tpl_assembler.h:
+../../../../../../machines/cortex-m/tpl_asm_definitions.h:
+readbutton_isr/tpl_cortex_definitions.h:
+../../../../../../os/tpl_as_memmap.h:
+readbutton_isr/tpl_app_define.h:
+../../../../../../os/tpl_config_def.h:
+../../../../../../os/tpl_config_check.h:
+readbutton_isr/AsMemMap.h:

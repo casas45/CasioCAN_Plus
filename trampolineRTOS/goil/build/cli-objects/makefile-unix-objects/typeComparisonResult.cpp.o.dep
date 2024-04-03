@@ -1,0 +1,5 @@
+../build/cli-objects/makefile-unix-objects/typeComparisonResult.cpp.o: \
+ ../build/libpm/galgas2/typeComparisonResult.cpp \
+ /usr/include/stdc-predef.h ../build/libpm/galgas2/typeComparisonResult.h
+/usr/include/stdc-predef.h:
+../build/libpm/galgas2/typeComparisonResult.h:

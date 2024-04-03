@@ -1,0 +1,96 @@
+build/os/tpl_os_alarm_kernel.c.o: \
+ ../../../../../../os/tpl_os_alarm_kernel.c \
+ ../../../../../../os/tpl_os_alarm_kernel.h \
+ ../../../../../../os/tpl_os_timeobj_kernel.h \
+ ../../../../../../os/tpl_os_internal_types.h \
+ ../../../../../../machines/cortex-m/tpl_os_std_types.h \
+ ../../../../../../os/tpl_os_custom_types.h \
+ ../../../../../../os/tpl_os_application_def.h \
+ readbutton_isr/tpl_app_define.h ../../../../../../os/tpl_config_def.h \
+ ../../../../../../os/tpl_config_check.h \
+ readbutton_isr/tpl_app_custom_types.h \
+ ../../../../../../os/tpl_compiler.h readbutton_isr/Compiler.h \
+ readbutton_isr/Compiler_Cfg.h \
+ ../../../../../../machines/cortex-m/tpl_machine.h \
+ ../../../../../../machines/cortex-m/tpl_machine_cortex.h \
+ ../../../../../../machines/cortex-m/tpl_os_std_types.h \
+ ../../../../../../os/tpl_os_internal_types.h \
+ ../../../../../../os/tpl_os_custom_types.h \
+ ../../../../../../machines/cortex-m/tpl_machine.h \
+ ../../../../../../machines/cortex-m/tpl_os_kernel_stack.h \
+ readbutton_isr/cmsis_wrapper.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0b1xx.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cm0plus.h \
+ /usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h \
+ /usr/arm-none-eabi/include/stdint.h \
+ /usr/arm-none-eabi/include/machine/_default_types.h \
+ /usr/arm-none-eabi/include/sys/features.h \
+ /usr/arm-none-eabi/include/_newlib_version.h \
+ /usr/arm-none-eabi/include/sys/_intsup.h \
+ /usr/arm-none-eabi/include/sys/_stdint.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cmInstr.h \
+ ../../../../../../machines/cortex-m/CMSIS/Include/core_cmFunc.h \
+ ../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h \
+ ../../../../../../os/tpl_compiler.h ../../../../../../os/tpl_memmap.h \
+ readbutton_isr/MemMap.h ../../../../../../os/tpl_os_action.h \
+ ../../../../../../os/tpl_os_task_kernel.h \
+ ../../../../../../os/tpl_os_kernel.h \
+ ../../../../../../os/tpl_os_multicore_macros.h \
+ ../../../../../../os/tpl_machine_interface.h \
+ ../../../../../../os/tpl_os_definitions.h \
+ ../../../../../../os/tpl_os_error.h ../../../../../../os/tpl_os_types.h \
+ ../../../../../../os/tpl_os_errorhook.h ../../../../../../os/tpl_trace.h \
+ ../../../../../../debug/tpl_debug.h \
+ ../../../../../../os/tpl_os_timeobj_kernel.h \
+ ../../../../../../os/tpl_memmap.h
+../../../../../../os/tpl_os_alarm_kernel.h:
+../../../../../../os/tpl_os_timeobj_kernel.h:
+../../../../../../os/tpl_os_internal_types.h:
+../../../../../../machines/cortex-m/tpl_os_std_types.h:
+../../../../../../os/tpl_os_custom_types.h:
+../../../../../../os/tpl_os_application_def.h:
+readbutton_isr/tpl_app_define.h:
+../../../../../../os/tpl_config_def.h:
+../../../../../../os/tpl_config_check.h:
+readbutton_isr/tpl_app_custom_types.h:
+../../../../../../os/tpl_compiler.h:
+readbutton_isr/Compiler.h:
+readbutton_isr/Compiler_Cfg.h:
+../../../../../../machines/cortex-m/tpl_machine.h:
+../../../../../../machines/cortex-m/tpl_machine_cortex.h:
+../../../../../../machines/cortex-m/tpl_os_std_types.h:
+../../../../../../os/tpl_os_internal_types.h:
+../../../../../../os/tpl_os_custom_types.h:
+../../../../../../machines/cortex-m/tpl_machine.h:
+../../../../../../machines/cortex-m/tpl_os_kernel_stack.h:
+readbutton_isr/cmsis_wrapper.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/stm32g0b1xx.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cm0plus.h:
+/usr/lib/gcc/arm-none-eabi/13.2.0/include/stdint.h:
+/usr/arm-none-eabi/include/stdint.h:
+/usr/arm-none-eabi/include/machine/_default_types.h:
+/usr/arm-none-eabi/include/sys/features.h:
+/usr/arm-none-eabi/include/_newlib_version.h:
+/usr/arm-none-eabi/include/sys/_intsup.h:
+/usr/arm-none-eabi/include/sys/_stdint.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cmInstr.h:
+../../../../../../machines/cortex-m/CMSIS/Include/core_cmFunc.h:
+../../../../../../machines/cortex-m/armv6m/stm32g0b1/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h:
+../../../../../../os/tpl_compiler.h:
+../../../../../../os/tpl_memmap.h:
+readbutton_isr/MemMap.h:
+../../../../../../os/tpl_os_action.h:
+../../../../../../os/tpl_os_task_kernel.h:
+../../../../../../os/tpl_os_kernel.h:
+../../../../../../os/tpl_os_multicore_macros.h:
+../../../../../../os/tpl_machine_interface.h:
+../../../../../../os/tpl_os_definitions.h:
+../../../../../../os/tpl_os_error.h:
+../../../../../../os/tpl_os_types.h:
+../../../../../../os/tpl_os_errorhook.h:
+../../../../../../os/tpl_trace.h:
+../../../../../../debug/tpl_debug.h:
+../../../../../../os/tpl_os_timeobj_kernel.h:
+../../../../../../os/tpl_memmap.h:

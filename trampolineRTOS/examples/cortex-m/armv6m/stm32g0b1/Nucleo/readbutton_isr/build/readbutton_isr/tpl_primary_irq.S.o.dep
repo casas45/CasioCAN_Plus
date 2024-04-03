@@ -1,0 +1,16 @@
+build/readbutton_isr/tpl_primary_irq.S.o: \
+ readbutton_isr/tpl_primary_irq.S \
+ ../../../../../../machines/cortex-m/tpl_assembler.h \
+ ../../../../../../machines/cortex-m/tpl_asm_definitions.h \
+ ../../../../../../machines/cortex-m/tpl_os_kernel_stack.h \
+ ../../../../../../os/tpl_as_memmap.h readbutton_isr/tpl_app_define.h \
+ ../../../../../../os/tpl_config_def.h \
+ ../../../../../../os/tpl_config_check.h readbutton_isr/AsMemMap.h
+../../../../../../machines/cortex-m/tpl_assembler.h:
+../../../../../../machines/cortex-m/tpl_asm_definitions.h:
+../../../../../../machines/cortex-m/tpl_os_kernel_stack.h:
+../../../../../../os/tpl_as_memmap.h:
+readbutton_isr/tpl_app_define.h:
+../../../../../../os/tpl_config_def.h:
+../../../../../../os/tpl_config_check.h:
+readbutton_isr/AsMemMap.h:

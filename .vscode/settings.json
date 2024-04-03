@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "bsp.h": "c",
+        "stm32g0xx.h": "c",
+        "tpl_app_define.h": "c"
+    }
+}

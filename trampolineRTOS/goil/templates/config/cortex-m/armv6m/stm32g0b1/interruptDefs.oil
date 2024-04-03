@@ -1,0 +1,256 @@
+/*
+ * Interrupt definitions for the STM32G0B1 micro-controller
+ */
+#include "../interruptDefsARM.oil"
+
+INTERRUPT WWDG_IRQ {
+  VECT = 16;
+  SETPRIO = TRUE { NUMBER = 0; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "WWDG_IRQHandler";
+  };
+} : "Window WatchDog Interrupt";
+
+INTERRUPT PVD_VDDIO2_IRQ {
+  VECT = 17;
+  SETPRIO = TRUE { NUMBER = 1; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "PVD_VDDIO2_IRQHandler";
+  };
+} : "PVD through EXTI line 16, PVM (monit. VDDIO2) through EXTI line 34";
+
+INTERRUPT RTC_TAMP_IRQ {
+  VECT = 18;
+  SETPRIO = TRUE { NUMBER = 2; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "RTC_TAMP_IRQHandler";
+  };
+} : "RTC interrupt through the EXTI line 19 & 21";
+
+INTERRUPT FLASH_IRQ {
+  VECT = 19;
+  SETPRIO = TRUE { NUMBER = 3; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "FLASH_IRQHandler";
+  };
+} : "FLASH global Interrupt";
+
+INTERRUPT RCC_CRS_IRQ {
+  VECT = 20;
+  SETPRIO = TRUE { NUMBER = 4; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "RCC_CRS_IRQHandler";
+  };
+} : "RCC and CRS global Interrupt";
+
+INTERRUPT EXTI0_1_IRQ {
+  VECT = 21;
+  SETPRIO = TRUE { NUMBER = 5; };
+  ACK = TRUE { ACKTYPE = EXTERNAL; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "EXTI0_1_IRQHandler";
+  };
+} : "EXTI 0 and 1 Interrupts";
+
+INTERRUPT EXTI2_3_IRQ {
+  VECT = 22;
+  SETPRIO = TRUE { NUMBER = 6; };
+  ACK = TRUE { ACKTYPE = EXTERNAL; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "EXTI2_3_IRQHandler";
+  };
+} : "EXTI Line 2 and 3 Interrupts";
+
+INTERRUPT EXTI4_15_IRQ {
+  VECT = 23;
+  SETPRIO = TRUE { NUMBER = 7; };
+  ACK = TRUE { ACKTYPE = EXTERNAL; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "EXTI4_15_IRQHandler";
+  };
+} : "EXTI Line 4 to 15 Interrupts";
+
+INTERRUPT USB_UCPD1_2_IRQ {
+  VECT = 24;
+  SETPRIO = TRUE { NUMBER = 8; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "USB_UCPD1_2_IRQHandler";
+  };
+} : "USB, UCPD1 and UCPD2 global Interrupt";
+
+INTERRUPT DMA1_Channel1_IRQ {
+  VECT = 25;
+  SETPRIO = TRUE { NUMBER = 9; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "DMA1_Channel1_IRQHandler";
+  };
+} : "DMA1 Channel 1 Interrupt";
+
+INTERRUPT DMA1_Channel2_3_IRQ {
+  VECT = 26;
+  SETPRIO = TRUE { NUMBER = 10; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "DMA1_Channel2_3_IRQHandler";
+  };
+} : "DMA1 Channel 2 and Channel 3 Interrupts";
+
+INTERRUPT DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQ {
+  VECT = 27;
+  SETPRIO = TRUE { NUMBER = 11; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler";
+  };
+} : "DMA1 Ch4 to Ch7, DMA2 Ch1 to Ch5 and DMAMUX1 Overrun Interrupts";
+
+INTERRUPT ADC1_COMP_IRQ {
+  VECT = 28;
+  SETPRIO = TRUE { NUMBER = 12; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "ADC1_COMP_IRQHandler";
+  };
+} : "ADC1, COMP1,COMP2, COMP3 Interrupts (combined with EXTI 17 & 18)";
+
+INTERRUPT TIM1_BRK_UP_TRG_COM_IRQ {
+  VECT = 29;
+  SETPRIO = TRUE { NUMBER = 13; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM1_BRK_UP_TRG_COM_IRQHandler";
+  };
+} : "TIM1 Break, Update, Trigger and Commutation Interrupts";
+
+INTERRUPT TIM1_CC_IRQ {
+  VECT = 30;
+  SETPRIO = TRUE { NUMBER = 14; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM1_CC_IRQHandler";
+  };
+} : "TIM1 Capture Compare Interrupt";
+
+INTERRUPT TIM2_IRQ {
+  VECT = 31;
+  SETPRIO = TRUE { NUMBER = 15; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM2_IRQHandler";
+  };
+} : "TIM2 Interrupt";
+
+INTERRUPT TIM3_TIM4_IRQ {
+  VECT = 32;
+  SETPRIO = TRUE { NUMBER = 16; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM3_TIM4_IRQHandler";
+  };
+} : "TIM3, TIM4 global Interrupt";
+
+INTERRUPT TIM6_DAC_LPTIM1_IRQ {
+  VECT = 33;
+  SETPRIO = TRUE { NUMBER = 17; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM6_DAC_LPTIM1_IRQHandler";
+  };
+} : "TIM6, DAC and LPTIM1 global Interrupts";
+
+INTERRUPT TIM7_LPTIM2_IRQ {
+  VECT = 34;
+  SETPRIO = TRUE { NUMBER = 18; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM7_LPTIM2_IRQHandler";
+  };
+} : "TIM7 and LPTIM2 global Interrupt";
+
+INTERRUPT TIM14_IRQ {
+  VECT = 35;
+  SETPRIO = TRUE { NUMBER = 19; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM14_IRQHandler";
+  };
+} : "TIM14 global Interrupt";
+
+INTERRUPT TIM15_IRQ {
+  VECT = 36;
+  SETPRIO = TRUE { NUMBER = 20; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM15_IRQHandler";
+  };
+} : "TIM15 global Interrupt";
+
+INTERRUPT TIM16_FDCAN_IT0_IRQ {
+  VECT = 37;
+  SETPRIO = TRUE { NUMBER = 21; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM16_FDCAN_IT0_IRQHandler";
+  };
+} : "TIM16, FDCAN1_IT0 and FDCAN2_IT0 Interrupt";
+
+INTERRUPT TIM17_FDCAN_IT1_IRQ {
+  VECT = 38;
+  SETPRIO = TRUE { NUMBER = 22; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "TIM17_FDCAN_IT1_IRQHandler";
+  };
+} : "TIM17, FDCAN1_IT1 and FDCAN2_IT1 Interrupt";
+
+INTERRUPT I2C1_IRQ {
+  VECT = 39;
+  SETPRIO = TRUE { NUMBER = 23; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "I2C1_IRQHandler";
+  };
+} : "I2C1 Interrupt  (combined with EXTI 23)";
+
+INTERRUPT I2C2_3_IRQ {
+  VECT = 40;
+  SETPRIO = TRUE { NUMBER = 24; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "I2C2_3_IRQHandler";
+  };
+} : "I2C2, I2C3 Interrupt (combined with EXTI 24 and EXTI 22)";
+
+INTERRUPT SPI1_IRQ {
+  VECT = 41;
+  SETPRIO = TRUE { NUMBER = 25; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "SPI1_IRQHandler";
+  };
+} : "SPI1/I2S1 Interrupt";
+
+INTERRUPT SPI2_3_IRQ {
+  VECT = 42;
+  SETPRIO = TRUE { NUMBER = 26; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "SPI2_3_IRQHandler";
+  };
+} : "SPI2/I2S2, SPI3/I2S3 Interrupt";
+
+INTERRUPT USART1_IRQ {
+  VECT = 43;
+  SETPRIO = TRUE { NUMBER = 27; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "USART1_IRQHandler";
+  };
+} : "USART1 Interrupt";
+
+INTERRUPT USART2_LPUART2_IRQ {
+  VECT = 44;
+  SETPRIO = TRUE { NUMBER = 28; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "USART2_LPUART2_IRQHandler";
+  };
+} : "USART2 + LPUART2 Interrupt";
+
+INTERRUPT USART3_4_5_6_LPUART1_IRQ {
+  VECT = 45;
+  SETPRIO = TRUE { NUMBER = 29; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "USART3_4_5_6_LPUART1_IRQHandler";
+  };
+} : "USART3, USART4, USART5, USART6, LPUART1 globlal Interrupts (combined with EXTI 28)";
+
+INTERRUPT CEC_IRQ {
+  VECT = 46;
+  SETPRIO = TRUE { NUMBER = 30; };
+  VECTOR_TYPE = HANDLER {
+    NAME = "CEC_IRQHandler";
+  };
+} : "CEC Interrupt(combined with EXTI 27)";
+
