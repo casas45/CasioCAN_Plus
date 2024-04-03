@@ -23,15 +23,6 @@
 #define STATIC
 #endif
 
-#define PERIOD_SERIAL_TASK      10u         /*!< Serial task periodicity */
-#define PERIOD_CLOCK_TASK       50u         /*!< Clock task periodicity */
-#define PERIOD_HEARTBEAT_TASK   300u        /*!< Heartbeat task periodicity */
-#define PERIOD_WATCHDOG_TASK    150u        /*!< Watchdog task periodicity */
-#define PERIOD_DISPLAY_TASK     100u        /*!< Display task periodicity */
-#define PERIOD_LCD_TASK         50u         /*!< Task to control LCD intensity and contrast periodicity */
-#define TASKS_N                 6u          /*!< Number of tasks registered in the scheduler */
-#define TIMERS_N                3u          /*!< Number of timers registered in the scheduler */
-
 /**
  * @brief   Variable with external linkage that is used to configure interrupt in ints.c file.
 */
