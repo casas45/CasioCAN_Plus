@@ -12,9 +12,15 @@
 # Project name - it's mandatory to name it as is in the CPU container and the oil file.
 TARGET = CasioCANplus
 # Files to compile
-SRCS  = main.c serial.c ints.c msps.c
+SRCS  = main.c serial.c clock.c analogs.c hel_lcd.c ints.c msps.c 
 SRCS += stm32g0xx_hal.c stm32g0xx_hal_cortex.c stm32g0xx_hal_rcc.c stm32g0xx_hal_flash.c
-SRCS += stm32g0xx_hal_gpio.c stm32g0xx_hal_fdcan.c 
+SRCS += stm32g0xx_hal_rcc_ex.c stm32g0xx_hal_pwr.c stm32g0xx_hal_pwr_ex.c
+SRCS += stm32g0xx_hal_gpio.c stm32g0xx_hal_fdcan.c
+SRCS += stm32g0xx_hal_rtc.c stm32g0xx_hal_rtc_ex.c stm32g0xx_hal_pwr.c stm32g0xx_hal_wwdg.c
+SRCS += stm32g0xx_hal_pwr_ex.c stm32g0xx_hal_rcc_ex.c clock.c stm32g0xx_hal_spi.c
+SRCS += stm32g0xx_hal_spi_ex.c stm32g0xx_hal_tim.c stm32g0xx_hal_tim_ex.c
+SRCS += stm32g0xx_hal_adc_ex.c stm32g0xx_hal_adc.c
+SRCS += stm32g0xx_hal_dma.c stm32g0xx_hal_dma_ex.c
 # Trampoline kernel files
 SRCS +=	tpl_os_kernel.c tpl_os_timeobj_kernel.c tpl_os_action.c tpl_os_error.c	 
 SRCS += tpl_os_os_kernel.c tpl_os_os.c tpl_os_interrupt_kernel.c tpl_os_task_kernel.c

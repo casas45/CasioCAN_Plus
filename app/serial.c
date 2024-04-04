@@ -81,7 +81,7 @@ void Serial_InitTask( void )
     CANHandler.Init.FrameFormat             = FDCAN_FRAME_CLASSIC;
     CANHandler.Init.ClockDivider            = FDCAN_CLOCK_DIV1;
     CANHandler.Init.TxFifoQueueMode         = FDCAN_TX_FIFO_OPERATION;
-    CANHandler.Init.NominalPrescaler        = 10;
+    CANHandler.Init.NominalPrescaler        = 8;
     CANHandler.Init.NominalSyncJumpWidth    = 1;
     CANHandler.Init.NominalTimeSeg1         = 11;
     CANHandler.Init.NominalTimeSeg2         = 4;
@@ -207,7 +207,8 @@ void HAL_FDCAN_RxFifo0Callback( FDCAN_HandleTypeDef *hfdcan, uint32_t TxEventFif
                 break;
         }
 
-        (void) SendMessage( serialMsgSend, &MsgCAN );
+        Status = SendMessage( serialMsgSend, &MsgCAN );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 }
 
@@ -310,7 +311,8 @@ STATIC APP_Messages Evaluate_Time_Parameters( APP_CanTypeDef *SerialMsgPtr )
         //assert_error( Status == TRUE, QUEUE_RET_ERROR );
     }
 
-    (void) SendMessage( serialMsgSend, &SerialMsg );
+    Status = SendMessage( serialMsgSend, &SerialMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return eventRet;
 }
@@ -355,7 +357,8 @@ STATIC APP_Messages Evaluate_Date_Parameters( APP_CanTypeDef *SerialMsgPtr )
         //assert_error( Status == TRUE, QUEUE_RET_ERROR );
     }
 
-    (void) SendMessage( serialMsgSend, &SerialMsg );
+    Status = SendMessage( serialMsgSend, &SerialMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return eventRet;
 }
@@ -396,7 +399,8 @@ STATIC APP_Messages Evaluate_Alarm_Parameters( APP_CanTypeDef *SerialMsgPtr )
         //assert_error( Status == TRUE, QUEUE_RET_ERROR );
     }
 
-    (void) SendMessage( serialMsgSend, &SerialMsg );
+    Status = SendMessage( serialMsgSend, &SerialMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return eventRet;
 }

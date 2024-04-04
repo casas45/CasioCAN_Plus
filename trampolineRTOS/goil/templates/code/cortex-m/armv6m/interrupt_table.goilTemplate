@@ -107,15 +107,7 @@ FUNC(void, OS_CODE) % !objList_KEY %Handler(void)
     end if
   end foreach
   let ackDone := false
-  foreach obj in objList do
-    if not ackDone then
-      if obj::ACK then
-        let ackDone := true
-%  %!objList_KEY%_ClearFlag();
-%
-      end if
-    end if
-  end foreach
+
 %
 }
 %
