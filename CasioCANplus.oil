@@ -3,12 +3,12 @@ OIL_VERSION = "2.5";
 IMPLEMENTATION trampoline {
     /* This fix the default STACKSIZE of tasks */
     TASK {
-        UINT32 STACKSIZE = 300 ;
+        UINT32 STACKSIZE = 500 ;
     } ;
 
     /* This fix the default STACKSIZE of ISRs */
     ISR {
-        UINT32 STACKSIZE = 200 ;
+        UINT32 STACKSIZE = 300 ;
     } ;
 };
 
@@ -29,6 +29,9 @@ CPU casioCAN_plus {
     };
 
     APPMODE std {};
+
+
+    /************* SERIAL ****************/
 
     MESSAGE serialMsgSend {
         MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
@@ -73,6 +76,8 @@ CPU casioCAN_plus {
         SOURCE = TIM16_FDCAN_IT0_IRQ;
     };
 
+    /*************** Heartbeat LED *****************/
+
     TASK Hearbeat_PeriodicTask {
         PRIORITY = 10;
         AUTOSTART = FALSE;
@@ -91,5 +96,76 @@ CPU casioCAN_plus {
             APPMODE = std;
         };
     };
+
+    /*************** CLOCK ***************************/
+
+    ISR isr_RTC {
+        CATEGORY = 1;
+        PRIORITY = 30;
+        SOURCE = RTC_TAMP_IRQ;
+    };
+
+    MESSAGE clockMsgSend {
+        MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
+            CDATATYPE = "APP_MsgTypeDef";
+        };
+    };
+
+    MESSAGE clockMsgReceive {
+        MESSAGEPROPERTY = RECEIVE_QUEUED_INTERNAL {
+            SENDINGMESSAGE = clockMsgSend;
+            FILTER = ALWAYS;
+            QUEUESIZE = 20;
+        };
+    };
+
+    TASK Clock_PeriodicTask {
+        PRIORITY = 15;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+        AUTOSTART = FALSE;
+    };
+
+    ALARM ClockAlarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK {
+            TASK = Clock_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            APPMODE = std;
+            ALARMTIME = 50;     /*periodicity of 50 ms*/
+            CYCLETIME = 50;
+        };
+    };
+
+    ALARM ClockUpdate_Alarm {
+        COUNTER = SystemCounter;
+        ACTION = ALARMCALLBACK {
+            ALARMCALLBACKNAME = "ClockUpdate";
+        };
+        AUTOSTART = TRUE {
+            APPMODE = std;
+            ALARMTIME = 1000;
+            CYCLETIME = 1000;
+        };
+    };
+
+    ALARM rtcOneSecond_Alarm {
+        COUNTER = SystemCounter;
+        ACTION = ALARMCALLBACK {
+            ALARMCALLBACKNAME = "TimerAlarmOneSecond";
+        };
+        AUTOSTART = FALSE;
+    };
+
+     ALARM rtcDeactivateAlarm_Alarm {
+        COUNTER = SystemCounter;
+        ACTION = ALARMCALLBACK {
+            ALARMCALLBACKNAME = "TimerDeactivateAlarm";
+        };
+        AUTOSTART = FALSE;
+    };
+
+    
 
 };

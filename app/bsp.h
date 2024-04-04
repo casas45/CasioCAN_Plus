@@ -10,6 +10,7 @@
 #include "stm32g0xx_hal_conf.h"
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 
 /* For testing purpose, when the macro UTEST is defined the safe_sate function is not used */
 #ifndef UTEST
@@ -23,11 +24,19 @@
 #define STATIC
 #endif
 
-/**
- * @brief   Variable with external linkage that is used to configure interrupt in ints.c file.
-*/
+/** @brief   Variable with external linkage that is used to configure interrupt in ints.c file. */
 extern FDCAN_HandleTypeDef CANHandler;
 
+/** @brief  RTC Handler external reference */
+extern RTC_HandleTypeDef h_rtc;
+
+
+
+/** @brief  SPI Handler external reference */
+extern SPI_HandleTypeDef SPI_Handler;
+
+/** @brief TIM3 Handler external reference */
+extern TIM_HandleTypeDef TIM3_Handler;
 
 /**
  * @brief   List of messages types.
