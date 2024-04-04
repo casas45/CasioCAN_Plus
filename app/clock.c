@@ -180,7 +180,7 @@ void TimerAlarmOneSecond_Callback( void )
     }
     
     displayEvent.msg        = DISPLAY_MSG_BACKLIGHT;
-    displayEvent.displayBkl = LCD_TOGGLE;
+    //displayEvent.displayBkl = LCD_TOGGLE;
 
     // Status = SendMessage( displayMsgSend, &displayEvent );
     // assert_error( Status == E_OK, QUEUE_RET_ERROR );
@@ -509,7 +509,7 @@ STATIC APP_MsgTypeDef Clock_Deactivate_Alarm( APP_MsgTypeDef *PtrMsgClk )
     assert_error( Status == E_OK, SCHE_RET_ERROR );
 
     displayEvent.msg        = DISPLAY_MSG_BACKLIGHT;
-    displayEvent.displayBkl = LCD_ON;
+    //displayEvent.displayBkl = LCD_ON;
     
     // Status = SendMessage( displayMsgSend, &displayEvent );
     // assert_error( Status == E_OK, QUEUE_RET_ERROR );

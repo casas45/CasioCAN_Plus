@@ -12,7 +12,7 @@
 # Project name - it's mandatory to name it as is in the CPU container and the oil file.
 TARGET = CasioCANplus
 # Files to compile
-SRCS  = main.c serial.c clock.c analogs.c hel_lcd.c ints.c msps.c 
+SRCS  = main.c serial.c clock.c analogs.c ints.c msps.c 
 SRCS += stm32g0xx_hal.c stm32g0xx_hal_cortex.c stm32g0xx_hal_rcc.c stm32g0xx_hal_flash.c
 SRCS += stm32g0xx_hal_rcc_ex.c stm32g0xx_hal_pwr.c stm32g0xx_hal_pwr_ex.c
 SRCS += stm32g0xx_hal_gpio.c stm32g0xx_hal_fdcan.c

@@ -140,22 +140,7 @@ void HAL_SPI_MspInit( SPI_HandleTypeDef *hspi )
     HAL_GPIO_Init( GPIOD, &GPIO_InitStruct );
 }
 
-void HEL_LCD_MspInit( LCD_HandleTypeDef *hlcd )
-{
-    (void) hlcd;
 
-    GPIO_InitTypeDef GPIO_InitStruct;
-
-    __HAL_RCC_GPIOB_CLK_ENABLE( );
-    __HAL_RCC_GPIOD_CLK_ENABLE( );
-
-    GPIO_InitStruct.Mode    = GPIO_MODE_OUTPUT_PP;
-    GPIO_InitStruct.Pull    = GPIO_PULLUP;
-    GPIO_InitStruct.Speed   = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Pin     = GPIO_PIN_2 | GPIO_PIN_3 | GPIO_PIN_4; /*Rst | Cs | Rs*/
-
-    HAL_GPIO_Init( GPIOD, &GPIO_InitStruct );
-}
 
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
