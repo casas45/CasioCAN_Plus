@@ -67,9 +67,6 @@ void Display_InitTask( void )
     APP_MsgTypeDef nextEvent;
     nextEvent.msg = CLOCK_MSG_DISPLAY;
 
-    Status = SendMessage( clockMsgSend, &nextEvent );
-    assert_error( Status == E_OK, QUEUE_RET_ERROR );
-
     /*SPI configuration*/
 
     SPI_Handler.Instance                = SPI1;
@@ -158,6 +155,8 @@ TASK( Display_PeriodicTask )
         }
         
     }
+
+    TerminateTask( );
 }
 
 /**
@@ -197,6 +196,8 @@ TASK( Display_LcdTask )
         Status_Intensity = HEL_LCD_Intensity( &LCD_Handler, new_intensity );
         assert_error( Status_Intensity == true, LCD_RET_ERROR );
     }
+
+    TerminateTask( );
     
 }
 
@@ -217,7 +218,7 @@ TASK( Display_LcdTask )
 */
 STATIC APP_MsgTypeDef Display_Update ( APP_MsgTypeDef *pDisplayMsg )
 {
-    APP_MsgTypeDef nextEvent = { .msg = DISPLAY_MSG_NONE};
+    APP_MsgTypeDef nextEvent = *pDisplayMsg;
 
     HAL_StatusTypeDef Status = HAL_ERROR;
 
@@ -240,6 +241,10 @@ STATIC APP_MsgTypeDef Display_Update ( APP_MsgTypeDef *pDisplayMsg )
 
     Status = HEL_LCD_String( &LCD_Handler, lcd_row_1_time );
     assert_error( Status == HAL_OK, SPI_RET_ERROR );
+
+    nextEvent.msg = DISPLAY_MSG_TEMPERATURE;
+    Status = SendMessage( displayMsgSend, &nextEvent );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return nextEvent;
 }

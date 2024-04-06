@@ -142,7 +142,7 @@ void Clock_InitTask( void )
  * This function write a SERIAL_MSG_DISPLAY in the ClockQueue, this is to indicate that it's
  * time to update the display, and also the timer is started again to continue using it.
  */
-void ClockUpdate_Callback( void )
+TASK(ClockUpdate_Callback)
 {
     uint8_t Status             = FALSE;
     APP_MsgTypeDef msgCallback = { 0 };
@@ -151,6 +151,8 @@ void ClockUpdate_Callback( void )
 
     Status = SendMessage( clockMsgSend, &msgCallback );
     assert_error( Status == E_OK, QUEUE_RET_ERROR );
+
+    TerminateTask( );
 }
 
 /**
@@ -180,10 +182,10 @@ void TimerAlarmOneSecond_Callback( void )
     }
     
     displayEvent.msg        = DISPLAY_MSG_BACKLIGHT;
-    //displayEvent.displayBkl = LCD_TOGGLE;
+    displayEvent.displayBkl = LCD_TOGGLE;
 
-    // Status = SendMessage( displayMsgSend, &displayEvent );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &displayEvent );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
 }
 
@@ -234,6 +236,8 @@ TASK( Clock_PeriodicTask )
             (void) ClockEventsMachine[ MsgClkRead.msg ]( &MsgClkRead );
         }
     }
+
+    TerminateTask( );
 }
 
 /**
@@ -368,8 +372,8 @@ STATIC APP_MsgTypeDef Clock_Set_Alarm( APP_MsgTypeDef *PtrMsgClk )
     Status = HAL_RTC_SetAlarm_IT( &h_rtc, &sAlarm, RTC_FORMAT_BIN );
     assert_error( Status == HAL_OK, RTC_RET_ERROR );
 
-    // Status = SendMessage( displayMsgSend, &nextEventDisplay );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &nextEventDisplay );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return alarmMsg;
 }
@@ -413,14 +417,13 @@ STATIC APP_MsgTypeDef Clock_Send_Display_Msg( APP_MsgTypeDef *PtrMsgClk )
 
     /*Write to the display queue to show temp */
     updateMsg.temperature = Analogs_GetTemperature( );
-    updateMsg.msg = DISPLAY_MSG_TEMPERATURE;
-    // Status = SendMessage( displayMsgSend, &updateMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     /*Write to the display queue to show time and date */
     updateMsg.msg = DISPLAY_MSG_UPDATE;
-    // Status = SendMessage( displayMsgSend, &updateMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &updateMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
+
+    //printf("%d:%d:%d\n\r", sTime.Hours, sTime.Minutes, sTime.Seconds );
 
     return updateMsg;
 }
@@ -452,12 +455,12 @@ STATIC APP_MsgTypeDef Clock_Alarm_Activated( APP_MsgTypeDef *PtrMsgClk )
     assert_error( Status == E_OK, SCHE_RET_ERROR );
 
     displayMsg.msg = DISPLAY_MSG_CLEAR_SECOND_LINE;
-    // Status = SendMessage( displayMsgSend, &displayMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &displayMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     displayMsg.msg = DISPLAY_MSG_ALARM_ACTIVE;
-    // Status = SendMessage( displayMsgSend, &displayMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &displayMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     Status = SetRelAlarm( rtcDeactivateAlarm_Alarm, ONE_MIN, 0  );
     assert_error( Status == E_OK, SCHE_RET_ERROR );
@@ -509,10 +512,14 @@ STATIC APP_MsgTypeDef Clock_Deactivate_Alarm( APP_MsgTypeDef *PtrMsgClk )
     assert_error( Status == E_OK, SCHE_RET_ERROR );
 
     displayEvent.msg        = DISPLAY_MSG_BACKLIGHT;
-    //displayEvent.displayBkl = LCD_ON;
+    displayEvent.displayBkl = LCD_ON;
     
-    // Status = SendMessage( displayMsgSend, &displayEvent );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &displayEvent );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
+
+    displayEvent.msg        = DISPLAY_MSG_CLEAR_SECOND_LINE;
+    Status = SendMessage( displayMsgSend, &displayEvent );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return updateMsg;
 }
@@ -555,13 +562,13 @@ STATIC APP_MsgTypeDef Clock_ButtonPressed( APP_MsgTypeDef *PtrMsgClk )
     {
         nextEvent.msg = DISPLAY_MSG_CLEAR_SECOND_LINE;
 
-        // Status = SendMessage( displayMsgSend, &nextEvent );
-        // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+        Status = SendMessage( displayMsgSend, &nextEvent );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
         nextEvent.msg = DISPLAY_MSG_ALARM_NO_CONF;
 
-        // Status = SendMessage( displayMsgSend, &nextEvent );
-        // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+        Status = SendMessage( displayMsgSend, &nextEvent );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     return nextEvent;
@@ -584,8 +591,8 @@ STATIC APP_MsgTypeDef Clock_ButtonReleased( APP_MsgTypeDef *PtrMsgClk )
     uint8_t Status = FALSE;
 
     nextDisplayEvent.msg = DISPLAY_MSG_CLEAR_SECOND_LINE;
-    // Status = SendMessage( displayMsgSend, &nextDisplayEvent );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &nextDisplayEvent );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     updateMsg.msg = CLOCK_MSG_DISPLAY;
     Status = SendMessage( clockMsgSend, &updateMsg );
@@ -598,8 +605,8 @@ STATIC APP_MsgTypeDef Clock_ButtonReleased( APP_MsgTypeDef *PtrMsgClk )
     {
         nextDisplayEvent.msg = DISPLAY_MSG_ALARM_SET;       /* Print the letter A again */
 
-        // Status = SendMessage( displayMsgSend, &nextDisplayEvent );
-        // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+        Status = SendMessage( displayMsgSend, &nextDisplayEvent );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     return nextDisplayEvent;
@@ -627,15 +634,15 @@ STATIC APP_MsgTypeDef Clock_GetAlarm( APP_MsgTypeDef *PtrMsgClk )
     assert_error( Status == HAL_OK, RTC_RET_ERROR );
 
     alarmMsg.msg = DISPLAY_MSG_CLEAR_SECOND_LINE;
-    // Status = SendMessage( displayMsgSend, &alarmMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &alarmMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     alarmMsg.msg        = DISPLAY_MSG_ALARM_VALUES;
     alarmMsg.tm.tm_hour = sAlarm.AlarmTime.Hours;
     alarmMsg.tm.tm_min  = sAlarm.AlarmTime.Minutes;
     
-    // Status = SendMessage( displayMsgSend, &alarmMsg );
-    // assert_error( Status == E_OK, QUEUE_RET_ERROR );
+    Status = SendMessage( displayMsgSend, &alarmMsg );
+    assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     return alarmMsg;
 }

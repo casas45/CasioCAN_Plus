@@ -1,2 +1,5 @@
 build
 CasioCANplus
+.vscode
+.VSCodeCounter
+casiocanmsgs.sh

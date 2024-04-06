@@ -3,12 +3,12 @@ OIL_VERSION = "2.5";
 IMPLEMENTATION trampoline {
     /* This fix the default STACKSIZE of tasks */
     TASK {
-        UINT32 STACKSIZE = 500 ;
+        UINT32 STACKSIZE = 400 ;
     } ;
 
     /* This fix the default STACKSIZE of ISRs */
     ISR {
-        UINT32 STACKSIZE = 300 ;
+        UINT32 STACKSIZE = 200 ;
     } ;
 };
 
@@ -31,7 +31,19 @@ CPU casioCAN_plus {
     APPMODE std {};
 
 
-    /************* SERIAL ****************/
+    MESSAGE clockMsgSend {
+        MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
+            CDATATYPE = "APP_MsgTypeDef";
+        };
+    };
+
+    MESSAGE clockMsgReceive {
+        MESSAGEPROPERTY = RECEIVE_QUEUED_INTERNAL {
+            SENDINGMESSAGE = clockMsgSend;
+            FILTER = ALWAYS;
+            QUEUESIZE = 30;
+        };
+    };
 
     MESSAGE serialMsgSend {
         MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
@@ -47,39 +59,24 @@ CPU casioCAN_plus {
         };
     };
 
-    TASK Serial_PeriodicTask
-    {
-        PRIORITY = 10;
-        AUTOSTART = FALSE;
-        ACTIVATION = 1;
-        SCHEDULE = FULL;
-
-        MESSAGE = serialMsgSend;
-        MESSAGE = serialMsgReceive;
-    };
-
-    ALARM SerialAlarm {
-        COUNTER = SystemCounter;
-        ACTION = ACTIVATETASK { 
-            TASK = Serial_PeriodicTask;
-        };
-        AUTOSTART = TRUE {
-            ALARMTIME = 10;
-            CYCLETIME = 10;
-            APPMODE = std;
+    MESSAGE displayMsgSend {
+        MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
+            CDATATYPE = "APP_MsgTypeDef";
         };
     };
 
-    ISR isr_CAN {
-        CATEGORY = 1;
-        PRIORITY = 25;
-        SOURCE = TIM16_FDCAN_IT0_IRQ;
+    MESSAGE displayMsgReceive {
+        MESSAGEPROPERTY = RECEIVE_QUEUED_INTERNAL {
+            SENDINGMESSAGE = displayMsgSend;
+            FILTER = ALWAYS;
+            QUEUESIZE = 30;
+        };
     };
 
-    /*************** Heartbeat LED *****************/
+/*************** Heartbeat LED *****************/
 
     TASK Hearbeat_PeriodicTask {
-        PRIORITY = 10;
+        PRIORITY = 1;
         AUTOSTART = FALSE;
         ACTIVATION = 1;
         SCHEDULE = FULL;
@@ -97,33 +94,105 @@ CPU casioCAN_plus {
         };
     };
 
+
+    /************* SERIAL ****************/
+
+    TASK Serial_PeriodicTask
+    {
+        PRIORITY = 2;
+        AUTOSTART = FALSE;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+
+        MESSAGE = serialMsgSend;
+        MESSAGE = serialMsgReceive;
+
+        MESSAGE = clockMsgSend;
+    };
+
+    ALARM SerialAlarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK { 
+            TASK = Serial_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            ALARMTIME = 10;
+            CYCLETIME = 10;
+            APPMODE = std;
+        };
+    };
+
+    ISR isr_CAN {
+        CATEGORY = 1;
+        PRIORITY = 1;
+        SOURCE = TIM16_FDCAN_IT0_IRQ;
+    };
+
+    /************** DISPLAY **************************/
+
+    TASK Display_PeriodicTask {
+        PRIORITY = 3;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+        AUTOSTART = FALSE;
+
+        MESSAGE = displayMsgReceive;
+        MESSAGE = displayMsgSend;
+    };
+
+    ALARM DisplayAlarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK {
+            TASK = Display_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            APPMODE = std;
+            ALARMTIME = 100;
+            CYCLETIME = 100;
+        };
+    };
+
+    TASK Display_LcdTask {
+        PRIORITY = 1;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+        AUTOSTART = FALSE;
+
+        MESSAGE = clockMsgSend;
+    };
+
+    ALARM DisplayLCD_Alarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK {
+            TASK = Display_LcdTask;
+        };
+        AUTOSTART = TRUE {
+            APPMODE = std;
+            ALARMTIME = 50;
+            CYCLETIME = 50;
+        };
+    };
+
+    
+
     /*************** CLOCK ***************************/
 
     ISR isr_RTC {
         CATEGORY = 1;
-        PRIORITY = 30;
+        PRIORITY = 2;
         SOURCE = RTC_TAMP_IRQ;
     };
 
-    MESSAGE clockMsgSend {
-        MESSAGEPROPERTY = SEND_STATIC_INTERNAL {
-            CDATATYPE = "APP_MsgTypeDef";
-        };
-    };
-
-    MESSAGE clockMsgReceive {
-        MESSAGEPROPERTY = RECEIVE_QUEUED_INTERNAL {
-            SENDINGMESSAGE = clockMsgSend;
-            FILTER = ALWAYS;
-            QUEUESIZE = 20;
-        };
-    };
-
     TASK Clock_PeriodicTask {
-        PRIORITY = 15;
+        PRIORITY = 3;
         ACTIVATION = 1;
         SCHEDULE = FULL;
         AUTOSTART = FALSE;
+
+        MESSAGE = clockMsgReceive;
+        MESSAGE = clockMsgSend;
+
+        MESSAGE = displayMsgSend;
     };
 
     ALARM ClockAlarm {
@@ -138,10 +207,19 @@ CPU casioCAN_plus {
         };
     };
 
+    TASK ClockUpdate_Callback {
+        PRIORITY = 4;
+        ACTIVATION = 1;
+        SCHEDULE = FULL;
+        AUTOSTART = TRUE{
+            APPMODE = std;
+        };
+    };
+
     ALARM ClockUpdate_Alarm {
         COUNTER = SystemCounter;
-        ACTION = ALARMCALLBACK {
-            ALARMCALLBACKNAME = "ClockUpdate";
+        ACTION = ACTIVATETASK {
+            TASK = ClockUpdate_Callback;
         };
         AUTOSTART = TRUE {
             APPMODE = std;
@@ -166,6 +244,40 @@ CPU casioCAN_plus {
         AUTOSTART = FALSE;
     };
 
+    ISR isr_button {
+        CATEGORY = 2;
+        PRIORITY = 1;
+        SOURCE = EXTI4_15_IRQ {
+        PINON15 = PB15 {
+            TRIGGER = BOTH;
+            PULL = NONE;
+        };
+        };
+
+        MESSAGE = clockMsgSend;
+    };
+
+
+
+    /********* WWDG ********************/
     
+    TASK Watchdog_PeriodicTask {
+        PRIORITY = 5;
+        ACTIVATION = 1;
+        SCHEDULE = NON;
+        AUTOSTART = FALSE;
+    };
+
+    ALARM WWDG_Alarm {
+        COUNTER = SystemCounter;
+        ACTION = ACTIVATETASK {
+            TASK = Watchdog_PeriodicTask;
+        };
+        AUTOSTART = TRUE {
+            APPMODE = std;
+            ALARMTIME = 150;
+            CYCLETIME = 150;
+        };
+    };
 
 };

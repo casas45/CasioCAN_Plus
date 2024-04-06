@@ -158,6 +158,8 @@ TASK( Serial_PeriodicTask )
         }
 
     }
+
+    TerminateTask( );
     
 }
 
@@ -307,8 +309,8 @@ STATIC APP_Messages Evaluate_Time_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_min  = minutes;
         ClkMsg.tm.tm_sec  = seconds;
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );
@@ -353,8 +355,8 @@ STATIC APP_Messages Evaluate_Date_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_year = year;
         ClkMsg.tm.tm_wday = WeekDay( day, month, year );
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );
@@ -395,8 +397,8 @@ STATIC APP_Messages Evaluate_Alarm_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_hour = hour;
         ClkMsg.tm.tm_min  = minutes;
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );

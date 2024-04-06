@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include "hel_lcd.h"
 
 /* For testing purpose, when the macro UTEST is defined the safe_sate function is not used */
 #ifndef UTEST
@@ -30,7 +31,8 @@ extern FDCAN_HandleTypeDef CANHandler;
 /** @brief  RTC Handler external reference */
 extern RTC_HandleTypeDef h_rtc;
 
-
+/** @brief  LCD Handler external reference */
+extern LCD_HandleTypeDef LCD_Handler;
 
 /** @brief  SPI Handler external reference */
 extern SPI_HandleTypeDef SPI_Handler;
