@@ -89,6 +89,7 @@
 /** 
   * @defgroup ContrastLevels Contrast levels max and min.
   @{ */
+/* cppcheck-suppress misra-c2012-2.5 ; this MACRO is used in test files */
 #define LCD_CONTRAST_1    0x00u   /*!< LCD contrast level 1 */
 #define LCD_CONTRAST_16   0x0Fu   /*!< LCD contrast level 16 */
 /**

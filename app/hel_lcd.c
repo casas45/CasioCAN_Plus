@@ -44,18 +44,24 @@ uint8_t HEL_LCD_Init( LCD_HandleTypeDef *hlcd )
     HAL_GPIO_WritePin( hlcd->RstPort, hlcd->RstPin, RESET );    /*Reset*/
     
     //HAL_Delay( 2u );
-    for( uint32_t delay = 0; delay < 5334; delay++ );
+    for( uint32_t delay = 0u; delay < 5334u; delay++ )
+    {
+    }
 
 
     HAL_GPIO_WritePin( hlcd->RstPort, hlcd->RstPin, SET );      /*clear Reset*/
     
     //HAL_Delay( 20u );
-    for( uint32_t delay = 0; delay < 53340; delay++ );
+    for( uint32_t delay = 0u; delay < 53340u; delay++ )
+    {
+    }
     
     retValue = HEL_LCD_Command( hlcd, CMD_WAKEUP );
     
     //HAL_Delay( 2u );
-    for( uint32_t delay = 0; delay < 5334; delay++ );
+    for( uint32_t delay = 0u; delay < 5334u; delay++ )
+    {
+    }
 
     while ( ( retValue == HAL_OK ) && ( i < FIRST_PART_CMDS ) )    /* send first 7 initialization commands */
     {
@@ -64,7 +70,9 @@ uint8_t HEL_LCD_Init( LCD_HandleTypeDef *hlcd )
     }
 
     //HAL_Delay( 200u );
-    for( uint32_t delay = 0; delay < 533400; delay++ );
+    for( uint32_t delay = 0u; delay < 533400u; delay++ )
+    {
+    }
 
     while( ( retValue == HAL_OK ) && ( i < SECOND_PART_CMDS ) )    /* send the last 3 initialization commands */
     {
@@ -73,7 +81,9 @@ uint8_t HEL_LCD_Init( LCD_HandleTypeDef *hlcd )
     }
 
     //HAL_Delay( 2u );
-    for( uint32_t delay = 0; delay < 5334; delay++ );
+    for( uint32_t delay = 0u; delay < 5334u; delay++ )
+    {
+    }
 
     if( retValue == HAL_OK )     /* If the initialization routine has been executed correctly.. */
     {

@@ -280,4 +280,10 @@ CPU casioCAN_plus {
         };
     };
 
+    ISR isr_WWDG {
+        CATEGORY = 1;
+        PRIORITY = 2;
+        SOURCE = WWDG_IRQ;
+    };
+
 };

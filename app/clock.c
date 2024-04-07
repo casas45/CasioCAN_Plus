@@ -142,6 +142,9 @@ void Clock_InitTask( void )
  * This function write a SERIAL_MSG_DISPLAY in the ClockQueue, this is to indicate that it's
  * time to update the display, and also the timer is started again to continue using it.
  */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK(ClockUpdate_Callback)
 {
     uint8_t Status             = FALSE;
@@ -212,6 +215,9 @@ void TimerDeactivateAlarm_Callback( void )
  * The state machine implementation is made througha a switch sentence where is evaluated
  * a ClkState variable that is in charge to save the next state to run.
  */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK( Clock_PeriodicTask )
 { 
     APP_MsgTypeDef MsgClkRead = { 0 };
@@ -542,8 +548,6 @@ STATIC APP_MsgTypeDef Clock_ButtonPressed( APP_MsgTypeDef *PtrMsgClk )
     Status = CancelAlarm( ClockUpdate_Alarm );
     assert_error( ( ( Status == E_OK ) | ( Status == E_OS_NOFUNC ) ), SCHE_RET_ERROR );
 
-    //HIL_QUEUE_flushQueueISR( &DisplayQueue );
-
     if( AlarmActivated_flg == TRUE )
     {
         nextEvent.msg = CLOCK_MSG_DEACTIVATE_ALARM;                       
@@ -599,7 +603,7 @@ STATIC APP_MsgTypeDef Clock_ButtonReleased( APP_MsgTypeDef *PtrMsgClk )
     assert_error( Status == E_OK, QUEUE_RET_ERROR );
 
     Status = SetRelAlarm( ClockUpdate_Alarm, ONE_SEC, ONE_SEC  ); /* restart the update alarm */
-    assert_error( Status == E_OK, SCHE_RET_ERROR );
+    assert_error( ( (Status == E_OK) | (Status == E_OS_STATE) ), SCHE_RET_ERROR );
 
     if( AlarmSet_flg == TRUE )
     {

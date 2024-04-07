@@ -28,6 +28,9 @@ SPI_HandleTypeDef SPI_Handler;
 /** @brief TIM3 Handler */
 TIM_HandleTypeDef TIM3_Handler;
 
+TASK( Display_PeriodicTask );
+TASK( Display_LcdTask );
+
 STATIC APP_MsgTypeDef Display_Update( APP_MsgTypeDef *pDisplayMsg );
 
 STATIC APP_MsgTypeDef Display_AlarmSet( APP_MsgTypeDef *pDisplayMsg );
@@ -62,10 +65,6 @@ STATIC void TemperatureString( char *string, int8_t temperature );
 void Display_InitTask( void )
 {
     HAL_StatusTypeDef Status = HAL_ERROR;
-
-    /* Write a msg to update the display after the initialization  */
-    APP_MsgTypeDef nextEvent;
-    nextEvent.msg = CLOCK_MSG_DISPLAY;
 
     /*SPI configuration*/
 
@@ -131,6 +130,9 @@ void Display_InitTask( void )
 /**
  * @brief   Function where the display event machine it's implemented.
 */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK( Display_PeriodicTask )
 {
     APP_MsgTypeDef (*DisplayEventMachine[ N_DISPLAY_EVENTS ])( APP_MsgTypeDef *DisplayMsg ) =
@@ -165,6 +167,9 @@ TASK( Display_PeriodicTask )
  * The aim of this function is to check if the intensity or contrast values have changed
  * and update this these values on the LCD.
 */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK( Display_LcdTask )
 {
     static uint8_t current_contrast = 0u;

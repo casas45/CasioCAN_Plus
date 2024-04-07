@@ -135,6 +135,9 @@ void Serial_InitTask( void )
  * The event machine implementation is made using a pointer to functions array, in each case a function
  * is called depending on the type of msg read from the queue.
 */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK( Serial_PeriodicTask )
 {
 
