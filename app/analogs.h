@@ -11,9 +11,10 @@
 /**
  * @brief   enum to organize the ADC channels
 */
+/* cppcheck-suppress misra-c2012-2.3 */
+/* cppcheck-suppress misra-c2012-2.4 */
 typedef enum
 {
-
     TEMP_INDEX = 0u,        /*!< Temperature value index in AdcData array */
     INTENSITY_INDEX,        /*!< Intensity value index in AdcData array */
     CONTRAST_INDEX,         /*!< Contrast value index in AdcData array */

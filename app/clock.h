@@ -8,8 +8,6 @@
 
 void Clock_InitTask( void );
 
-void ClockUpdate_Callback( void );
-
 void TimerAlarmOneSecond_Callback( void );
 
 void TimerDeactivateAlarm_Callback( void );

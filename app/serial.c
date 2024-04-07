@@ -135,6 +135,9 @@ void Serial_InitTask( void )
  * The event machine implementation is made using a pointer to functions array, in each case a function
  * is called depending on the type of msg read from the queue.
 */
+/* cppcheck-suppress misra-c2012-2.7 ; The parameters aren't used in the task */
+/* cppcheck-suppress misra-c2012-8.2 ; This macro forms part of tpl source code */
+/* cppcheck-suppress misra-c2012-8.4 ; The TASK macro includes the external reference */
 TASK( Serial_PeriodicTask )
 {
 
@@ -158,6 +161,8 @@ TASK( Serial_PeriodicTask )
         }
 
     }
+
+    TerminateTask( );
     
 }
 
@@ -307,8 +312,8 @@ STATIC APP_Messages Evaluate_Time_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_min  = minutes;
         ClkMsg.tm.tm_sec  = seconds;
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );
@@ -353,8 +358,8 @@ STATIC APP_Messages Evaluate_Date_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_year = year;
         ClkMsg.tm.tm_wday = WeekDay( day, month, year );
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );
@@ -395,8 +400,8 @@ STATIC APP_Messages Evaluate_Alarm_Parameters( APP_CanTypeDef *SerialMsgPtr )
         ClkMsg.tm.tm_hour = hour;
         ClkMsg.tm.tm_min  = minutes;
 
-        //Status = HIL_QUEUE_writeDataISR( &ClockQueue, &ClkMsg );
-        //assert_error( Status == TRUE, QUEUE_RET_ERROR );
+        Status = SendMessage( clockMsgSend, &ClkMsg );
+        assert_error( Status == E_OK, QUEUE_RET_ERROR );
     }
 
     Status = SendMessage( serialMsgSend, &SerialMsg );

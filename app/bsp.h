@@ -11,10 +11,12 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include "hel_lcd.h"
 
 /* For testing purpose, when the macro UTEST is defined the safe_sate function is not used */
 #ifndef UTEST
-#define assert_error(expr, error)           ((expr) ? (void)0U : (void)0U ) /*!< Macro to handle errrors */
+#define assert_error(expr, error)           ((expr) ? (void)0U : safe_state(__FILE__, __LINE__, (error))) /*!< Macro to handle errrors */
+extern void safe_state( const char *file, uint32_t line, uint8_t error );
 
 #define STATIC static       /*!< Macro to remove static keyword only for unit tests */
 
@@ -30,13 +32,17 @@ extern FDCAN_HandleTypeDef CANHandler;
 /** @brief  RTC Handler external reference */
 extern RTC_HandleTypeDef h_rtc;
 
-
+/** @brief  LCD Handler external reference */
+extern LCD_HandleTypeDef LCD_Handler;
 
 /** @brief  SPI Handler external reference */
 extern SPI_HandleTypeDef SPI_Handler;
 
 /** @brief TIM3 Handler external reference */
 extern TIM_HandleTypeDef TIM3_Handler;
+
+/** @brief  WWDG Handler external reference */
+extern WWDG_HandleTypeDef h_watchdog;
 
 /**
  * @brief   List of messages types.
@@ -131,6 +137,7 @@ typedef enum
 /**
  * @brief   Enum to clasify the application error codes.
 */
+/* cppcheck-suppress misra-c2012-2.3*/
 typedef enum _App_ErrorsCode
 {
     WWDG_RET_ERROR = 1u,
